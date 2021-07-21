@@ -1,6 +1,6 @@
 # AlphaSynMouse
 
-This repository contains code for a summer project that explores a mathematical model (the heterodimer model) adapted from Fornari et al [2] of the protein alpha synuclein spreads throughout the mouse brain. It is unclear what the function of healthy alpha synuclein is, but it is known that this protein can misfold and this misfolded form is present in a range of diseases known as synucleinopathies, which includes Parkinson's disease. 
+This repository contains code for a short research placement that explores a mathematical model (the heterodimer model) adapted from Fornari et al [2] of the protein alpha synuclein spreads throughout the mouse brain. It is unclear what the function of healthy alpha synuclein is, but it is known that this protein can misfold and this misfolded form is present in a range of diseases known as synucleinopathies, which includes Parkinson's disease. 
 
 
 The main file _Connectome Diffusion Model.m_ works data which includes:

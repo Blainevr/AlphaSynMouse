@@ -87,12 +87,11 @@ RL=["AAA",	"ACAd",	"ACAv",	"ACB",	"AD",	"AHN",	"AId",	"AIp",	"AIv",...
     "VMH",	"VPL",	"VPM",	"VPMpc",	"VTA",	"XII"]; %SUBv changed to SUB to fit with brainrender
 
 
-%Regions Appearing in Rey et Al, Figure 4
-ReyR=[  94, 15, 194, 129, 7, 8, 9, 49, 114, 4, 79, 80, 81, 36, 96, 177,...
+%Region IDs from Allen Mouse Brain, which appear in Rey et al, Figure 4
+DataR=[  94, 15, 194, 129, 7, 8, 9, 49, 114, 4, 79, 80, 81, 36, 96, 177,...
         178, 179, 180, 181, 182, 55, 56, 106, 24, 75, 22, 23, 28, 87, 122, 46,...
         191, 18, 20, 190, 47, 48, 167, 168, 212, 186, 102];
-[t,c]=ode45(@(t,c) BrainODE(c,t,Lr,paraHD),linspace(0,168,6*7*4),[(paraHD.k0/paraHD.k1).*ones(paraHD.N,1);zeros(93,1);1.5;zeros(paraHD.N-94,1)]);
-
+    
 
 
 %% Alpha Syn Projection Simulation
@@ -100,22 +99,28 @@ ReyR=[  94, 15, 194, 129, 7, 8, 9, 49, 114, 4, 79, 80, 81, 36, 96, 177,...
 %Parameters for the Heterodimer Model
 paraHD=struct('N',length(Ar),'ModelType',"HD",'k0',0.014.*(log(2)/14.8)*24,'k1',(log(2)/14.8)*24,'k3',(2.8e-05)*24,'k12',(10.7e-02)*24,'kap',[1,0.6]);
 
-%The data in Rey et al. provides regions with a Pser129 score.
+%The data in Data et al. provides regions with a Pser129 score.
 %“0= no inclusions”, “1= sparse inclusions”, “2= mild burden”,“3 = dense burden”, and “4= very dense”
 
 %The matrix below contains the by-hand copied data and the Pser129 scores
-%for regions in commen between Allen brain data and Rey et al data (and
-%associated position in matrix). This is split into pairs of two columns,
-%for data 3 MPI and 6 MPI for each strain
+%for regions in common between Allen brain data and Rey et al data. 
+% This is split into pairs of two columns, for data 3 MPI and 6 MPI for each strain
 
-RD=load('ReyData.mat','ReyData');
-RD=RD.ReyData;
+Data=load('Data.mat');
+SpreadData=Data.SpreadData;
+timepoints=Data.timepoints;
 
-Fibrils=RD(:,1:2);
-Ribbons=RD(:,3:4);
-F65=RD(:,5:6);
-F91=RD(:,7:8);
-F110=RD(:,9:10);
+
+Fibrils=SpreadData(:,1:2);
+Ribbons=SpreadData(:,3:4);
+F65=SpreadData(:,5:6);
+F91=SpreadData(:,7:8);
+F110=SpreadData(:,9:10);
+%This is for easy of use. Can instead simply use SpreadData as is, and
+%split based on the length of timepoints, i.e Strain i's data is
+%SpreadData(:,1+length(timepoints)*(i-1):length(timepoints)*i)
+
+
 
 
 %Matrix to convert numbers to strain names
@@ -135,14 +140,14 @@ paraHD=struct('N',length(Ar),'ModelType',"HD",'k0',0.014.*(log(2)/14.8)*24,...
 [t,c]=ode45(@(t,c) BrainODE(c,t,Lr,paraHD),linspace(0,168,6*7*4),[(paraHD.k0/paraHD.k1).*ones(paraHD.N,1);zeros(93,1);1.5;zeros(paraHD.N-94,1)]);
 
 %concentrations of misfolded protein at 3 and 6 months
-StrainBurden(:,:,strain) = c(timepoints,paraHD.N+ReyR)';
+StrainBurden(:,:,strain) = c(timepoints,paraHD.N+DataR)';
  
 subplot(4,2,2*strain-1)
-bar(RD(:,[2*strain-1,2*strain]))
+bar(SpreadData(:,[2*strain-1,2*strain]))
 xlim([0.5,43.5])
 xticks([1:43])
 xtickangle(45)
-xticklabels(RL(ReyR))
+xticklabels(RL(DataR))
 ylim([0,3])
 ylabel("Pser-129 Score "+StrainToText(strain))
 set(gca,'fontsize', 9)
@@ -150,7 +155,7 @@ subplot(4,2,2*strain)
 bar(StrainBurden(:,:,strain)) 
 xlim([0.5,43.5])
 xticks([1:43])
-xticklabels(RL(ReyR))
+xticklabels(RL(DataR))
 xtickangle(45)
 ylabel('Concentration \mu{M}')
 
@@ -162,7 +167,7 @@ end
 legend("3 MPI","6 MPI")
 
 
-%% Final Data, Range of Behaviours across different parameter values and also directions
+%% Range of Behaviours across different parameter values and also directions
 %This collects data with the intention of importing it to brain-render to
 %visualise
 
@@ -183,11 +188,11 @@ for ind1=1:length(k12v)
         paraHD=struct('N',length(Asym),'ModelType',"HD",'k0',0.014.*(log(2)/14.8)*24,...
     'k1',(log(2)/14.8)*24,'k3',(0.14*8.4*1e-05)*24,'k12',k12v(ind1),'kap',[1,kapv(ind2)]);
         [t,c]=ode45(@(t,c) BrainODE(c,t,Lsym,paraHD),linspace(0,168,6*7*4),[(paraHD.k0/paraHD.k1).*ones(paraHD.N,1);zeros(93,1);1.5;zeros(paraHD.N-94,1)]);
-        MPI3 = c(end/2,paraHD.N+ReyR)';
-        MPI6 = c(end,paraHD.N+ReyR)';
+        MPI3 = c(end/2,paraHD.N+DataR)';
+        MPI6 = c(end,paraHD.N+DataR)';
 
         Table = array2table([MPI3,MPI6]'.*0.5875./MPI6(4)./4);
-        Table.Properties.VariableNames=RL(ReyR);
+        Table.Properties.VariableNames=RL(DataR);
         write(Table,"SymModelTable"+ind1+","+ind2+".csv")
     end
 end
@@ -199,11 +204,11 @@ for ind1=1:length(k12v)
         paraHD=struct('N',length(Asym),'ModelType',"HD",'k0',0.014.*(log(2)/14.8)*24,...
     'k1',(log(2)/14.8)*24,'k3',(0.14*8.4*1e-05)*24,'k12',k12v(ind1),'kap',[1,kapv(ind2)]);
         [t,c]=ode45(@(t,c) BrainODE(c,t,La,paraHD),linspace(0,168,6*7*4),[(paraHD.k0/paraHD.k1).*ones(paraHD.N,1);zeros(93,1);1.5;zeros(paraHD.N-94,1)]);
-        MPI3 = c(end/2,paraHD.N+ReyR)';
-        MPI6 = c(end,paraHD.N+ReyR)';
+        MPI3 = c(end/2,paraHD.N+DataR)';
+        MPI6 = c(end,paraHD.N+DataR)';
 
         Table = array2table([MPI3,MPI6]'.*0.5875./MPI6(4)./4);
-        Table.Properties.VariableNames=RL(ReyR);
+        Table.Properties.VariableNames=RL(DataR);
         write(Table,"AModelTable"+ind1+","+ind2+".csv")
     end
 end
@@ -216,11 +221,11 @@ for ind1=1:length(k12v)
         paraHD=struct('N',length(Lr),'ModelType',"HD",'k0',0.014.*(log(2)/14.8)*24,...
     'k1',(log(2)/14.8)*24,'k3',(0.14*8.4*1e-05)*24,'k12',k12v(ind1),'kap',[1,kapv(ind2)]);
         [t,c]=ode45(@(t,c) BrainODE(c,t,Lr,paraHD),linspace(0,168,6*7*4),[(paraHD.k0/paraHD.k1).*ones(paraHD.N,1);zeros(93,1);1.5;zeros(paraHD.N-94,1)]);
-        MPI3 = c(end/2,paraHD.N+ReyR)';
-        MPI6 = c(end,paraHD.N+ReyR)';
+        MPI3 = c(end/2,paraHD.N+DataR)';
+        MPI6 = c(end,paraHD.N+DataR)';
 
        Table = array2table([MPI3,MPI6]'.*0.5875./MPI6(4)./4);
-       Table.Properties.VariableNames=RL(ReyR);
+       Table.Properties.VariableNames=RL(DataR);
        write(Table,"RModelTable"+ind1+","+ind2+".csv")
     end
 end

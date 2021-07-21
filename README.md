@@ -3,22 +3,22 @@
 This repository contains code for a summer project that explores a mathematical model (the heterodimer model) adapted from Fornari et al [2] of the protein alpha synuclein spreads throughout the mouse brain. It is unclear what the function of healthy alpha synuclein is, but it is known that this protein can misfold and this misfolded form is present in a range of diseases known as synucleinopathies, which includes Parkinson's disease. 
 
 
-The main file Connectome Diffusion Model.m works data which includes:
+The main file _Connectome Diffusion Model.m_ works data which includes:
 
 
-WeightMatrix.m - contains connection strengths between regions 
+_WeightMatrix.m_ - contains connection strengths between regions 
 
-TractLengths.m - Euclidean distance between centres of masses for different regions
+_TractLengths.m _- Euclidean distance between centres of masses for different regions
 
-Volumes.m      - Volume in voxels of the different regions
+_Volumes.m_      - Volume in voxels of the different regions
 
 All taken from Oh et al (2014)
 
-Data.m contains:
+_Data.m_ contains:
 
-SpreadData which is the by-hand-copied Pser129 scores from Rey et al 2019 for the different strains (Figure 4)
+_SpreadData_ which is the by-hand-copied Pser129 scores from Rey et al 2019 for the different strains (Figure 4)
 
-timeponts a vector of time points (in days) where the Pser129 scores were obtained.
+_timepoints_ a vector of time points (in days) where the Pser129 scores were obtained.
 
 This code is easily adapted to other data structured in a similar way, for arbitrary time points, and any other measure of disease burden. 
 

@@ -8,7 +8,7 @@ The main file _Connectome Diffusion Model.m_ works data which includes:
 
 _WeightMatrix.m_ - contains connection strengths between regions 
 
-_TractLengths.m _- Euclidean distance between centres of masses for different regions
+_TractLengths.m_- Euclidean distance between centres of masses for different regions
 
 _Volumes.m_      - Volume in voxels of the different regions
 

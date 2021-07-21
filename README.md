@@ -53,3 +53,10 @@ This project was completed over a 6 week REP funded by MIBTP and supervised by P
 
 7.   Rey, N.L., Bousset, L., George, S. et al. α-Synuclein conformational strains spread, seed and target neuronal cells differentially after injection into the olfactory bulb. acta neuropathol commun 7, 221 (2019). https://doi.org/10.1186/s40478-019-0859-3
 
+
+Parameters obtained from:
+
+k1: clearance rate of healthy protein, worked out based on half life in https://science.sciencemag.org/content/305/5688/1292.long
+k0: production rate of healthy protein, chosen to match baseline levels in https://pubmed.ncbi.nlm.nih.gov/19155272/ given clearance rate k1 
+k3: clearance rate of misfolded protein, chosen so system progresses towards disease state
+

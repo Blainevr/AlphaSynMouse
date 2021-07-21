@@ -12,11 +12,11 @@ _TractLengths.m _- Euclidean distance between centres of masses for different re
 
 _Volumes.m_      - Volume in voxels of the different regions
 
-All taken from Oh et al (2014)
+All taken from Oh et al (2014) [6]
 
 _Data.m_ contains:
 
-_SpreadData_ which is the by-hand-copied Pser129 scores from Rey et al 2019 for the different strains (Figure 4)
+_SpreadData_ which is the by-hand-copied Pser129 scores from Rey et al 2019 [7] for the different strains (Figure 4)
 
 _timepoints_ a vector of time points (in days) where the Pser129 scores were obtained.
 
@@ -35,20 +35,21 @@ The match is less close for the other strains, but anterograde spreads seems to 
 
 This project was completed over a 6 week REP funded by MIBTP and supervised by Professor Johannes Boltze.
 
+
 **References:**
+
 
 1.   Claudi, Federico, Adam L. Tyson, and Tiago Branco. 2020. “Brainrender. A Python Based Software for Visualisation of Neuroanatomical and Morphological Data.” Cold Spring Harbor Laboratory. https://doi.org/10.1101/2020.02.23.961748.
 
 
-3.   Fornari Sveva, Schäfer Amelie, Jucker Mathias, Goriely Alain and Kuhl Ellen 2019Prion-like spreading of Alzheimer’s disease within the brain’s connectomeJ. R. Soc. Interface.162019035620190356
+3.   Fornari Sveva, Schäfer Amelie, Jucker Mathias, Goriely Alain and Kuhl Ellen 2019Prion-like spreading of Alzheimer’s disease within the brain’s connectomeJ. R. Soc. Interface.162019035620190356 http://doi.org/10.1098/rsif.2019.0356
 
 
-http://doi.org/10.1098/rsif.2019.0356
-4. Mezias C, Rey N, Brundin P, Raj A. Neural connectivity predicts spreading of alpha-synuclein pathology in fibril-injected mouse models: Involvement of retrograde and anterograde axonal propagation. Neurobiol Dis. 2020;134:104623. doi:10.1016/j.nbd.2019.104623
+5. Mezias C, Rey N, Brundin P, Raj A. Neural connectivity predicts spreading of alpha-synuclein pathology in fibril-injected mouse models: Involvement of retrograde and anterograde axonal propagation. Neurobiol Dis. 2020;134:104623. doi:10.1016/j.nbd.2019.104623
 
 
 6.   Oh, S., Harris, J., Ng, L. et al. A mesoscale connectome of the mouse brain. Nature 508, 207–214 (2014). https://doi.org/10.1038/nature13186
 
 
-8.   Rey, N.L., Bousset, L., George, S. et al. α-Synuclein conformational strains spread, seed and target neuronal cells differentially after injection into the olfactory bulb. acta neuropathol commun 7, 221 (2019). https://doi.org/10.1186/s40478-019-0859-3
+7.   Rey, N.L., Bousset, L., George, S. et al. α-Synuclein conformational strains spread, seed and target neuronal cells differentially after injection into the olfactory bulb. acta neuropathol commun 7, 221 (2019). https://doi.org/10.1186/s40478-019-0859-3
 

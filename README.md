@@ -3,7 +3,7 @@
 This repository contains code for a short research placement that explores a mathematical model (the heterodimer model) adapted from Fornari et al [2] of how the protein alpha synuclein spreads throughout the mouse brain. It is unclear what the function of healthy alpha synuclein is, but it is known that this protein can misfold and this misfolded form is present in a range of diseases known as synucleinopathies, which includes Parkinson's disease. It is also now known that there are various misfolded arrangments of the protein known as strains [6] which that these spread differently throughout the mouse brain. This project aims to investigate in silico what factors contribute to this differential spread. 
 
 
-The main file _Connectome Diffusion Model.m_ works data which includes:
+The main file _Connectome Diffusion Model.m_ contains data which includes:
 
 
 _WeightMatrix.m_ - contains connection strengths between regions 
@@ -23,13 +23,13 @@ _timepoints_ a vector of time points (in days) where the Pser129 scores were obt
 This code is easily adapted to other data structured in a similar way, for arbitrary time points, and any other measure of disease burden. 
 
 
-The main loads this data, creates several graphical Laplacian's (essentially the graph discretised version of the Laplacian operator) for the different possible axonal directions of travel: retrograde, anterograde and unbiased. After this it creates a grid of bar charts showing the concentrations at the two timepoints for a selection of the strains on the right (retrograde only), and the associated Pser129 score on the left. Arbitrary values are taken for the models two free parameters.
+The main file loads this data, creates several graphical Laplacian's (essentially the graph discretised version of the Laplacian operator) for the different possible axonal directions of travel: retrograde, anterograde and unbiased. After this it creates a grid of bar charts showing the concentrations at the two timepoints for a selection of the strains on the right (retrograde only), and the associated Pser129 score on the left. Arbitrary values are taken for the models two free parameters.
 
 The next section of the main file "%% Range of Behaviours across different parameter values and also directions" collects data about the spread for a range of parameter values and outputs tables of relative intensities of disease burden (scaled misfolded protein concentration) in the form of csv files. A range of spreading patterns is observed. These are scaled so that the PIR brain region has the same intensity for both Pser129 score and also the simulation because this region is consistently infected for all parameter regimes.
 
 These csv files can then be used to create visualisations of the protein's spread using brain-render (https://github.com/brainglobe/brainrender). The software is not included in this repository, but the screenshot producing files are included. Press space once the image as loaded to allow the software to complete the screenshot and represent the next set of data.
 
-This work is the first use of an ODE model including production, clearance, and connectenome data used to to investigate the spread, and thus provides an idea of the relative influence of these parameters on overall spreading pattern. The screenshots included show a visual comparsion between the spread of the different strains in Rey et al's data, and also the spread as simulated. There is a strong similarity between the spread of ribbons and fibrils which appear to mainly go in retrograde direction and the retorgrade simulations. This fits with data in [3] which shows early transmission is best explained by retrograde transport.
+This work is the first use of an ODE model including production, clearance, and mouse connectenome data used to to investigate the spread, and thus provides an idea of the relative influence of these parameters on overall spreading pattern. The screenshots included show a visual comparsion between the spread of the different strains in Rey et al's data, and also the spread as simulated. There is a strong similarity between the spread of ribbons and fibrils which appear to mainly go in retrograde direction and the retorgrade simulations. This fits with data in [3] which shows early transmission is best explained by retrograde transport.
 
 The match is less close for the other strains, but anterograde spreads seems to match best.
 
